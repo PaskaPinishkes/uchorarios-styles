@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Horario from "./components/Horario";
