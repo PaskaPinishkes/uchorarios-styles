@@ -4,6 +4,7 @@ import "./App.css";
 import Horario from "./components/Horario";
 import { DIA_SEMANA, URL_BUSCACURSOS } from "./util/util";
 import { cursos } from "@aurmeneta/buscacursos-uc";
+import html2canvas from 'html2canvas';
 
 function App() {
   const [modulos, setModulos] = useState([]);
@@ -86,6 +87,15 @@ function App() {
     siglaSeccionActual.current = "";
   }
 
+  async function descargarHorario() {
+    const canvas = await html2canvas(document.getElementById('body')!);
+    const image = canvas.toDataURL();
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = 'horario.png';
+    link.click();
+  }
+
   return (
     <div>
       <h1 className="font-exposeregular text-center text-[80px]">HORARIO UC</h1>
@@ -134,6 +144,12 @@ function App() {
           onClick={mostrarTodasSecciones}
         >
           <span className="relative">Mostrar Todas Las Secciones</span>
+        </button>
+        <button
+          className="border border-p5-bg m-4 font-p5menu text-[24px] relative hover:before:block hover:before:absolute before:-inset-1 hover:before:-skew-y-3 hover:before:bg-cyan-300 before:ease before:duration-300 transition-all"
+          onClick={descargarHorario}
+        >
+          <span className="relative">Descargar Horario</span>
         </button>
       </div>
     </div>
